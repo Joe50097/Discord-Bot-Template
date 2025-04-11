@@ -39,7 +39,7 @@ async def help(interaction: discord.Interaction):
         color=discord.Color.blue()
     )
     embed.add_field(name="`/help`", value="Get a list of available commands!", inline=False)
-    embed.add_field(name="`/ping`", value="Check how fast the bot is at the moment!", inline=False)
+    embed.add_field(name="`/ping`", value="Check how fast the bot is at the moment! (Less ms means faster responses)", inline=False)
     embed.add_field(name="`/hello`", value="Say hello!", inline=False)
     
     embed.set_footer(text="Use /help to see this message again.")
@@ -50,7 +50,7 @@ async def help(interaction: discord.Interaction):
 # /ping command
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-@bot.tree.command(name="ping", description="Check how fast the bot is at the moment! (Lower ms means faster responses)")
+@bot.tree.command(name="ping", description="Check how fast the bot is at the moment! (Less ms means faster responses)")
 async def ping(interaction: discord.Interaction):
     # calculate the latency between the bot and discord server
     latency = round(bot.latency * 1000)
