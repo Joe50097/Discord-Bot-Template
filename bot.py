@@ -10,10 +10,11 @@ load_dotenv()
 # define the intents
 intents = discord.Intents.default()
 intents.message_content = True # enable message content intent
+intents.presences = True # enable presence intent
 intents.members = True # enable server members intent
 
 # bot instance
-bot = commands.Bot(intents=intents, command_prefix=None, help_command=None)
+bot = commands.AutoShardedBot(intents=intents, command_prefix=None, help_command=None)
 
 # bot Token
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
@@ -22,6 +23,8 @@ TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 async def on_ready():
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.listening, name="/help ✨"))
     print(f'{bot.user.name} is online! ✨')
+    shards = bot.shard_count or 1
+    print(f"Running on {shards} shard(s)")
     try:
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} command(s)")
